@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DataGenerationTool.Repositories;
+using DataGenerationTool.Services;
+using Microsoft.Xrm.Tooling.Connector;
 
 namespace DataGenerationTool
 {
@@ -10,6 +8,12 @@ namespace DataGenerationTool
     {
         static void Main(string[] args)
         {
+            var orgService = new CrmServiceClient("");
+            var repository = new RentDataGenerationRepository(orgService);
+            var randomizeService = new RandomizeService();
+            var service = new RentDataGenerationService(repository, randomizeService);
+
+            service.GenerateData();
         }
     }
 }
